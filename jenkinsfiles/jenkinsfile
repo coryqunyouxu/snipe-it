@@ -10,7 +10,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                dir('deployment') {
+                dir('jenkinsfiles') {
                     sh 'microk8s kubectl apply -f deployment.yaml'
                     sh 'microk8s kubectl apply -f snipe_it-Svc.yaml'
                     sh 'microk8s kubectl rollout restart deployment snipe_it'
