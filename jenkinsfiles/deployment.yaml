@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: snipe_it
+  name: snipe-it
   labels:
-    app: snipe_it
+    app: snipe-it
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: snipe_it
+      app: snipe-it
   template:
     metadata:
       labels:
-        app: snipe_it
+        app: snipe-it
     spec:
       containers:
-        - name: snipe_it_container
-          image: 172.23.8.1:9500/snipe_it:v0
+        - name: snipe-it-container
+          image: 172.23.8.1:9500/snipe-it:v0
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
-              name: snipe_it
+              name: snipe-it
