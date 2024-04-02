@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: snipe_it
+  labels:
+    app: labelprinter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: labelprinter
+  template:
+    metadata:
+      labels:
+        app: labelprinter
+    spec:
+      containers:
+        - name: labelprinter-django
+          image: 172.23.8.1:9500/labelprinter:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+              name: labelprinter
