@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('Build the docker image and push to registry.') {
             steps {
-                sh 'docker build . -t 172.23.8.1:9500/snipe_it:v0 --no-cache'
-                sh 'docker image push 172.23.8.1:9500/snipe_it:v0'
+                sh 'docker build . -t 172.23.8.1:9500/snipe-it:v0 --no-cache'
+                sh 'docker image push 172.23.8.1:9500/snipe-it:v0'
             }
         }
 
@@ -12,8 +12,8 @@ pipeline {
             steps {
                 dir('jenkinsfiles') {
                     sh 'microk8s kubectl apply -f deployment.yaml'
-                    sh 'microk8s kubectl apply -f snipe_it-Svc.yaml'
-                    sh 'microk8s kubectl rollout restart deployment snipe_it'
+                    sh 'microk8s kubectl apply -f snipe-it-Svc.yaml'
+                    sh 'microk8s kubectl rollout restart deployment snipe-it'
                 }
             }
         }
