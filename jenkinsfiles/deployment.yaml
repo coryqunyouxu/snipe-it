@@ -3,21 +3,21 @@ kind: Deployment
 metadata:
   name: snipe_it
   labels:
-    app: labelprinter
+    app: snipe_it
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: labelprinter
+      app: snipe_it
   template:
     metadata:
       labels:
-        app: labelprinter
+        app: snipe_it
     spec:
       containers:
         - name: labelprinter-django
-          image: 172.23.8.1:9500/labelprinter:latest
+          image: 172.23.8.1:9500/snipe_it:v0
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
-              name: labelprinter
+              name: snipe_it
