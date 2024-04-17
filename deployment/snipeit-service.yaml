@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml -o deployment
+    kompose.version: 1.31.2 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: snipeit
+  name: snipeit
+spec:
+  ports:
+    - name: "8000"
+      port: 8000
+      targetPort: 80
+  selector:
+    io.kompose.service: snipeit
+status:
+  loadBalancer: {}
