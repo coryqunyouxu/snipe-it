@@ -16,6 +16,11 @@ pipeline {
                 }
             }
         }
+        stage('Check Ingress') {
+            steps {
+                sh 'microk8s kubectl get ingress'
+            }
+        }
         stage('Get Service URL') {
             agent any
             steps {
