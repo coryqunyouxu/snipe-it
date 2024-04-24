@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         MINIKUBE_IP = sh(script: 'minikube ip', returnStdout: true).trim()
-        DNS_NAME = sh(script: 'minikube ip').trim().replace('.', '-') + '.nip.io'
+        DNS_NAME = sh(script: 'minikube ip', returnStdout: true).trim().replace('.', '-') + '.nip.io'
     }
     stages {
         stage('Build the docker image and push to registry.') {
