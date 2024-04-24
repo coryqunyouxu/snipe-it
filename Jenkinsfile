@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         SNIPEIT_INGRESS_HOST = '192.168.49.2'
-        SNIPEIT_INGRESS_PORT = '80'
+        SNIPEIT_INGRESS_PORT = '8000'
     }
     stages {
         stage('Build the docker image and push to registry.') {
