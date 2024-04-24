@@ -20,9 +20,16 @@ pipeline {
             agent any
             steps {
                 script {
-                    def ingressIp = sh(script: 'microk8s kubectl get ingress -o=jsonpath="{.status.loadBalancer.ingress[0].ip}"', returnStdout: true).trim()
-                    def ingressPort = sh(script: 'microk8s kubectl get ingress -o=jsonpath="{.spec.ports[0].port}"', returnStdout: true).trim()
-                    env.INGRESS_URL = "http://${ingressIp}:${ingressPort}"
+                    def snipeitIngressIp = sh(script: 'microk8s kubectl get ingress snipeit-ingress -o=jsonpath="{.status.loadBalancer.ingress[0].ip}"', returnStdout: true).trim()
+                    def snipeitIngressPort = sh(script: 'microk8s kubectl get ingress snipeit-ingress -o=jsonpath="{.spec.ports[0].port}"', returnStdout: true).trim()
+
+                    // 获取 Redis Ingress 的 IP 和端口
+                    def redisIngressIp = sh(script: 'microk8s kubectl get ingress redis-ingress -o=jsonpath="{.status.loadBalancer.ingress[0].ip}"', returnStdout: true).trim()
+                    def redisIngressPort = sh(script: 'microk8s kubectl get ingress redis-ingress -o=jsonpath="{.spec.ports[0].port}"', returnStdout: true).trim()
+
+                    // 將 IP 和端口組合成 URL
+                    env.SNIPEIT_INGRESS_URL = "http://${snipeitIngressIp}:${snipeitIngressPort}"
+                    env.REDIS_INGRESS_URL = "http://${redisIngressIp}:${redisIngressPort}"
                 }
                 echo "Ingress URL: ${env.INGRESS_URL}"
             }
