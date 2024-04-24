@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        MINIKUBE_IP = '192.168.49.2'
+    }
     stages {
         stage('Build the docker image and push to registry.') {
             steps {
