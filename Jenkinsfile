@@ -1,13 +1,27 @@
 pipeline {
     agent any
     stages {
+        stage('Delete existing minikube instance') {
+            steps {
+                sh 'minikube delete'
+            }
+        }
+        stage('Start minikube') {
+            steps {
+                sh 'minikube start --driver=hyperkit --kubernetes-version v1.15.0'
+            }
+        }
+        stage('Enable Ingress addon') {
+            steps {
+                sh 'minikube addons enable ingress'
+            }
+        }
         stage('Build the docker image and push to registry.') {
             steps {
                 sh 'docker build . -t 172.23.8.1:9500/snipeit:latest --no-cache'
                 sh 'docker image push 172.23.8.1:9500/snipeit:latest'
             }
         }
-
         stage('Deploy to the minikube') {
             steps {
                 dir('deployment') {
@@ -30,9 +44,13 @@ pipeline {
                     
                     // 構建 Ingress URL
                     env.SNIPEIT_INGRESS_URL = "http://${minikubeIp}"
+                    
+                    // 將域名對應到 minikube IP，並將結果添加到 /etc/hosts 文件中
+                    sh "echo '${minikubeIp} snipeit.services.com' >> /etc/hosts"
                 }
                 echo "Ingress URL: ${env.SNIPEIT_INGRESS_URL}"
             }
         }
     }
 }
+
