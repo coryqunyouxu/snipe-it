@@ -1,7 +1,8 @@
 pipeline {
     agent any
     environment {
-        MINIKUBE_IP = '192.168.49.2'
+        SNIPEIT_INGRESS_HOST = '192.168.49.2'
+        SNIPEIT_INGRESS_PORT = '80'
     }
     stages {
         stage('Build the docker image and push to registry.') {
@@ -27,14 +28,8 @@ pipeline {
             agent any
             steps {
                 script {
-                    // 使用 minikube ip 命令返回的 IP 地址
-                    def minikubeIp = sh(script: 'minikube ip', returnStdout: true).trim()
-                    
-                    // 構建 Ingress URL
-                    env.SNIPEIT_INGRESS_URL = "http://${minikubeIp}"
-                    
-                    // 將域名對應到 minikube IP，並將結果添加到 /etc/hosts 文件中
-                    sh "sh -c 'echo \"${minikubeIp} snipeit.services.com\" >> /etc/hosts'"
+                    // 使用環境變量構建 Ingress URL
+                    env.SNIPEIT_INGRESS_URL = "http://${SNIPEIT_INGRESS_HOST}:${SNIPEIT_INGRESS_PORT}"
                 }
                 echo "Ingress URL: ${env.SNIPEIT_INGRESS_URL}"
             }
