@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        MINIKUBE_IP = sh(script: 'minikube ip', returnStdout: true).trim()
+    }
     stages {
         stage('Build the docker image and push to registry.') {
             steps {
@@ -10,6 +13,7 @@ pipeline {
         stage('Deploy to the minikube') {
             steps {
                 dir('deployment') {
+                    sh "sed -i 's/snipeit.services.com/${MINIKUBE_IP}/g' ingress.yaml"
                     sh 'microk8s kubectl apply -f "*.yaml"'
                     sh 'microk8s kubectl rollout restart deployment snipeit'               
                 }
@@ -18,6 +22,14 @@ pipeline {
         stage('Check Ingress') {
             steps {
                 sh 'microk8s kubectl get ingress'
+            }
+        }
+    }
+    post {
+        always {
+            script {
+                def snipeitUrl = "http://${MINIKUBE_IP}:8000"
+                echo "You can access SnipeIT at: ${snipeitUrl}"
             }
         }
     }
