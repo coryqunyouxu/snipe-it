@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         MINIKUBE_IP = sh(script: 'minikube ip', returnStdout: true).trim()
+        DNS_NAME = sh(script: 'minikube ip').trim().replace('.', '-') + '.nip.io'
     }
     stages {
         stage('Build the docker image and push to registry.') {
@@ -13,7 +14,7 @@ pipeline {
         stage('Deploy to the minikube') {
             steps {
                 dir('deployment') {
-                    sh "sed -i 's/snipeit.services.com/${MINIKUBE_IP}/g' ingress.yaml"
+                    sh "sed -i 's/snipeit.services.com/${DNS_NAME}/g' ingress.yaml"
                     sh 'microk8s kubectl apply -f "*.yaml"'
                     sh 'microk8s kubectl rollout restart deployment snipeit'               
                 }
