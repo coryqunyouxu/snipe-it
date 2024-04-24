@@ -31,7 +31,7 @@ pipeline {
                     env.SNIPEIT_INGRESS_URL = "http://${minikubeIp}"
                     
                     // 將域名對應到 minikube IP，並將結果添加到 /etc/hosts 文件中
-                    sh "echo '${minikubeIp} snipeit.services.com' >> /etc/hosts"
+                    sh "sudo sh -c 'echo \"${minikubeIp} snipeit.services.com\" >> /etc/hosts'"
                 }
                 echo "Ingress URL: ${env.SNIPEIT_INGRESS_URL}"
             }
