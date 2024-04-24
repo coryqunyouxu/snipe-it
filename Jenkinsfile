@@ -20,9 +20,11 @@ pipeline {
             agent any
             steps {
                 script {
-                    def serviceURL = sh(script: 'microk8s kubectl get svc snipeit -o=jsonpath="{.status.loadBalancer.ingress[0].ip}:{.spec.ports[0].port}"', returnStdout: true).trim()
-                    echo "Service URL: http://${serviceURL}"
+                    def ingressIp = sh(script: 'microk8s kubectl get ingress -o=jsonpath="{.status.loadBalancer.ingress[0].ip}"', returnStdout: true).trim()
+                    def ingressPort = sh(script: 'microk8s kubectl get ingress -o=jsonpath="{.spec.ports[0].port}"', returnStdout: true).trim()
+                    env.INGRESS_URL = "http://${ingressIp}:${ingressPort}"
                 }
+                echo "Ingress URL: ${env.INGRESS_URL}"
             }
         }
     }
