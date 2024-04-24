@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: snipeit-ingress
+spec:
+  rules:
+    - host: snipeit.services.com  # 替換成您的域名
+      http:
+        paths:
+          - path: /redis
+            pathType: Prefix
+            backend:
+              service:
+                name: redis
+                port:
+                  number: 6379
+          - path: /snipeit
+            pathType: Prefix
+            backend:
+              service:
+                name: snipeit
+                port:
+                  number: 8000
