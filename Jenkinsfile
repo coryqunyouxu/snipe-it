@@ -1,21 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Delete existing minikube instance') {
-            steps {
-                sh 'minikube delete'
-            }
-        }
-        stage('Start minikube') {
-            steps {
-                sh 'minikube start --driver=docker --kubernetes-version v1.16.0'
-            }
-        }
-        stage('Enable Ingress addon') {
-            steps {
-                sh 'minikube addons enable ingress'
-            }
-        }
         stage('Build the docker image and push to registry.') {
             steps {
                 sh 'docker build . -t 172.23.8.1:9500/snipeit:latest --no-cache'
