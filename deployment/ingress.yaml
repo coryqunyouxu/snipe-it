@@ -34,4 +34,4 @@ spec:
               service:
                 name: mariadb
                 port:
-                  number: 8000
+                  number: 3306
