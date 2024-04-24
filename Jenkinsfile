@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Start minikube') {
             steps {
-                sh 'minikube start --driver=hyperkit --kubernetes-version v1.15.0'
+                sh 'minikube start --driver=hyperkit --kubernetes-version v1.16.0'
             }
         }
         stage('Enable Ingress addon') {
