@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    environment {
-        SNIPEIT_INGRESS_HOST = '192.168.49.2'
-        SNIPEIT_INGRESS_PORT = '8000'
-    }
     stages {
         stage('Build the docker image and push to registry.') {
             steps {
@@ -22,16 +18,6 @@ pipeline {
         stage('Check Ingress') {
             steps {
                 sh 'microk8s kubectl get ingress'
-            }
-        }
-        stage('Get Service URL') {
-            agent any
-            steps {
-                script {
-                    // 使用環境變量構建 Ingress URL
-                    env.SNIPEIT_INGRESS_URL = "http://${SNIPEIT_INGRESS_HOST}:${SNIPEIT_INGRESS_PORT}"
-                }
-                echo "Ingress URL: ${env.SNIPEIT_INGRESS_URL}"
             }
         }
     }
