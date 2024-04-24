@@ -21,3 +21,17 @@ spec:
                 name: snipeit
                 port:
                   number: 8000
+          - path: /mailhog
+            pathType: Prefix
+            backend:
+              service:
+                name: mailhog
+                port:
+                  number: 8000
+          - path: /mariadb
+            pathType: Prefix
+            backend:
+              service:
+                name: mariadb
+                port:
+                  number: 8000
