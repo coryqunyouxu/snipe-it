@@ -25,13 +25,10 @@ pipeline {
             agent any
             steps {
                 script {
-                    def snipeitIngressIp = sh(script: 'microk8s kubectl get ingress snipeit-ingress -o=jsonpath="{.status.loadBalancer.ingress[0].ip}"', returnStdout: true).trim()
-                    def snipeitIngressPort = sh(script: 'microk8s kubectl get ingress snipeit-ingress -o=jsonpath="{.spec.ports[0].port}"', returnStdout: true).trim()
-                    // 將 IP 和端口組合成 URL
-                    env.SNIPEIT_INGRESS_URL = "http://${snipeitIngressIp}:${snipeitIngressPort}"
-                    
+                    def snipeitIngressUrl = sh(script: 'microk8s kubectl get ingress snipeit-ingress -o=jsonpath="{.status.loadBalancer.ingress[0].ip}"', returnStdout: true).trim()
+                    env.SNIPEIT_INGRESS_URL = "http://${snipeitIngressUrl}"
                 }
-                echo "Ingress URL: ${env.SNIPEIT_INGRESS_UR}"
+                echo "Ingress URL: ${env.SNIPEIT_INGRESS_URL}"
             }
         }
     }
