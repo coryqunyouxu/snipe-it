@@ -25,8 +25,11 @@ pipeline {
             agent any
             steps {
                 script {
-                    def snipeitIngressUrl = sh(script: 'microk8s kubectl get ingress snipeit-ingress -o=jsonpath="{.status.loadBalancer.ingress[0].ip}"', returnStdout: true).trim()
-                    env.SNIPEIT_INGRESS_URL = "http://${snipeitIngressUrl}"
+                    // 使用 minikube ip 命令返回的 IP 地址
+                    def minikubeIp = sh(script: 'minikube ip', returnStdout: true).trim()
+                    
+                    // 構建 Ingress URL
+                    env.SNIPEIT_INGRESS_URL = "http://${minikubeIp}"
                 }
                 echo "Ingress URL: ${env.SNIPEIT_INGRESS_URL}"
             }
