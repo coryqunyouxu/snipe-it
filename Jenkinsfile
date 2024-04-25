@@ -28,10 +28,10 @@ pipeline {
             steps {
                 script {
                     // Change service type to LoadBalancer
-                    sh 'kubectl patch svc/frontend -p \'{\"spec\": {\"type\": \"LoadBalancer\"}}\''
+                    sh 'kubectl patch svc/snipeit -p \'{\"spec\": {\"type\": \"LoadBalancer\"}}\''
                     
                     // Get updated service details
-                    sh 'kubectl get service frontend'
+                    sh 'kubectl get service snipeit'
                 }
             }
         }
