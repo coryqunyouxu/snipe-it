@@ -23,15 +23,11 @@ pipeline {
                 }
             }
         }
-
-        stage('Change service type to LoadBalancer') {
+        stage('Enable Ingress') {
             steps {
                 script {
-                    // Change service type to LoadBalancer
-                    sh 'kubectl patch svc/snipeit -p \'{\"spec\": {\"type\": \"LoadBalancer\"}}\''
-                    
-                    // Get updated service details
-                    sh 'kubectl get service snipeit'
+                    // Enable Ingress in microk8s
+                    sh 'microk8s enable ingress'
                 }
             }
         }
