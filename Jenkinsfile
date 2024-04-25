@@ -31,5 +31,13 @@ pipeline {
                 }
             }
         }
+        stage('Get Ingress Pods') {
+            steps {
+                script {
+                    // Get Ingress Pods in the 'ingress' namespace
+                    sh 'microk8s kubectl get pods -n ingress'
+                }
+            }
+        }
     }
 }
