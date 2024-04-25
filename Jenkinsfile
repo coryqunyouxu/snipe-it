@@ -24,24 +24,14 @@ pipeline {
             }
         }
 
-        stage('Get service URL') {
+        stage('Change service type to LoadBalancer') {
             steps {
                 script {
-                    // 步驟3：從 Kubernetes 中獲取服務的 IP 地址和端口
-                    def serviceUrl = sh(
-                        script: 'microk8s kubectl get svc snipeit -o=jsonpath="{.status.loadBalancer.ingress[0].ip}:{.spec.ports[0].port}"',
-                        returnStdout: true
-                    ).trim()
-                    env.SERVICE_URL = "http://${serviceUrl}"
-                }
-            }
-        }
-
-        stage('Display service URL') {
-            steps {
-                script {
-                    // 步驟4：顯示服務的 URL
-                    echo "Service URL: ${env.SERVICE_URL}"
+                    // Change service type to LoadBalancer
+                    sh 'kubectl patch svc/frontend -p \'{\"spec\": {\"type\": \"LoadBalancer\"}}\''
+                    
+                    // Get updated service details
+                    sh 'kubectl get service frontend'
                 }
             }
         }
