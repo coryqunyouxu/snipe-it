@@ -9,7 +9,15 @@ pipeline {
                 }
             }
         }
-        
+        stage('describe pvc and storageclass ') {
+            steps {
+                script {
+                    sh 'microk8s kubectl describe pvc db'
+                    sh 'microk8s kubectl describe pvc snipeit-claim0'
+                    sh 'microk8s kubectl describe storageclass '
+                }
+            }
+        }
         stage('Check pvc') {
             steps {
                 script {
