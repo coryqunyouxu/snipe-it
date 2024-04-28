@@ -10,6 +10,13 @@ pipeline {
             }
         }
         
+        stage('Check pvc') {
+            steps {
+                script {
+                    sh 'microk8s kubectl get pvc'
+                }
+            }
+        }
         stage('Deploy to Kubernetes') {
             steps {
                 script {
