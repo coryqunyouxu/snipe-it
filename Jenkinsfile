@@ -9,7 +9,7 @@ pipeline {
                 }
             }
         }
-        stage('describe pvc and storageclass ') {
+        stage('delete') {
             steps {
                 script {
                     sh 'microk8s kubectl delete persistentvolume db-pv'
