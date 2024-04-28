@@ -34,11 +34,13 @@ pipeline {
                 }
             }
         }
-        stage('Get Snipeit Service IP') {
+        stage('Get And Check Snipeit Service IP') {
             steps {
                 script {
-                    def snipeitIpPort = sh(script: "microk8s kubectl get svc snipeit '-o=jsonpath={.status.loadBalancer.ingress[0].ip}:{.spec.ports[0].port}'", returnStdout: true).trim()
-                    echo "Snipeit Service IP and Port: ${snipeitIpPort}"
+                    def snipeitIp = sh(script: "microk8s kubectl get svc snipeit '-o=jsonpath={.status.loadBalancer.ingress[0].ip}'", returnStdout: true).trim()
+                    def snipeitPort = sh(script: "microk8s kubectl get svc snipeit '-o=jsonpath={.spec.ports[0].port}'", returnStdout: true).trim()
+                    echo "Snipeit Service IP: ${snipeitIp}:${snipeitPort}"
+                    sh "ping -c 5 ${snipeitIP}"
                 }
             }
         }
