@@ -9,6 +9,16 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    dir('deployment') {
+                        sh 'microk8s kubectl apply -f "*.yaml"'
+                        sh 'microk8s kubectl rollout restart deployment snipeit'
+                    }
+                }
+            }
+        }
         stage('describe pvc and storageclass ') {
             steps {
                 script {
@@ -25,16 +35,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    dir('deployment') {
-                        sh 'microk8s kubectl apply -f "*.yaml"'
-                        sh 'microk8s kubectl rollout restart deployment snipeit'
-                    }
-                }
-            }
-        }
+        
         stage('Enable Ingress') {
             steps {
                 script {
