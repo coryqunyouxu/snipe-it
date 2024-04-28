@@ -19,6 +19,14 @@ pipeline {
                 }
             }
         }
+        stage('Delete PVC') {
+            steps {
+                script {
+                    sh 'microk8s kubectl delete persistentvolumeclaim db'
+                    sh 'microk8s kubectl delete persistentvolumeclaim snipeit-claim0'
+                }
+            }
+        }
         stage('describe pvc and storageclass ') {
             steps {
                 script {
