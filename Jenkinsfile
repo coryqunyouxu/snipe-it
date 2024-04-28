@@ -19,6 +19,14 @@ pipeline {
                 }
             }
         }
+        stage('Get AWS EBS Volume ID') {
+            steps {
+                script {
+                    def awsEbsVolumeId = sh(script: 'aws ec2 describe-volumes --filters Name=tag:Name,Values=db-snipeit-storage --query "Volumes[0].VolumeId" --output text', returnStdout: true).trim()
+                    echo "AWS EBS Volume ID: ${awsEbsVolumeId}"
+                }
+            }
+        }
         stage('describe pvc and storageclass ') {
             steps {
                 script {
