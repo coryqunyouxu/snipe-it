@@ -496,5 +496,5 @@ spec:
       volumes:
         - name: db
           persistentVolumeClaim:
-            claimName: db
+            claimName: dbclaim0
 status: {}
