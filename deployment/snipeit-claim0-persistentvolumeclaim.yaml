@@ -9,7 +9,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   storageClassName: db-snipeit-storage
-  resources:
-    requests:
-      storage: 100Mi
 status: {}
