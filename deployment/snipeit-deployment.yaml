@@ -491,10 +491,10 @@ spec:
           resources: {}
           volumeMounts:
             - mountPath: /var/www/html/storage/logs
-              name: snipeit-claim0
+              name: snipeitclaim0
       restartPolicy: Always
       volumes:
-        - name: snipeit-claim0
+        - name: snipeitclaim0
           persistentVolumeClaim:
             claimName: snipeit-claim0
 status: {}
