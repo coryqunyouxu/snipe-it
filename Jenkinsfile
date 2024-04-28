@@ -9,6 +9,21 @@ pipeline {
                 }
             }
         }
+        stage('Validate Docker Image') {
+            steps {
+                script {
+                    // 使用 kubectl 在节点上尝试拉取镜像
+                    def imagePullResult = sh(script: 'microk8s ctr images pull 172.23.8.1:9500/snipeit:latest', returnStatus: true)
+                    
+                    // 检查拉取结果
+                    if (imagePullResult == 0) {
+                        echo 'Docker image pulled successfully.'
+                    } else {
+                        error 'Failed to pull Docker image. Check if the image is available and accessible.'
+                    }
+                }
+            }
+        }
 
         stage('Deploy to Kubernetes') {
             steps {
