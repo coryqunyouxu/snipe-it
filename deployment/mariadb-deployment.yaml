@@ -491,10 +491,10 @@ spec:
           resources: {}
           volumeMounts:
             - mountPath: /var/lib/mysql
-              name: db
+              name: mdb
       restartPolicy: Always
       volumes:
-        - name: db
+        - name: mdb
           persistentVolumeClaim:
-            claimName: dbclaim0
+            claimName: db
 status: {}
