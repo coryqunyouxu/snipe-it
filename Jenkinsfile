@@ -37,7 +37,7 @@ pipeline {
         stage('Describe Snipeit Pod') {
             steps {
                 script {
-                    sh 'microk8s kubectl describe pod snipeit-59cbbbc4b5-vz2rv'
+                    sh 'microk8s kubectl describe pod -l app=snipeit'
                 }
             }
         }
