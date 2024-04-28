@@ -8,5 +8,4 @@ spec:
   accessModes:
   - ReadWriteOnce         
   storageClassName: db-snipeit-storage
-  hostPath:              
-    path: /tmp
+  
