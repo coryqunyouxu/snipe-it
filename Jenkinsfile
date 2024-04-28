@@ -9,16 +9,8 @@ pipeline {
                 }
             }
         }
-        stage('Delete PVC') {
-            steps {
-                script {
-                    sh 'microk8s kubectl delete persistentvolumeclaim db'
-                    sh 'microk8s kubectl delete persistentvolumeclaim snipeit-claim0'
-                    sh 'microk8s kubectl delete persistentvolume db-pv'
-                    sh 'microk8s kubectl delete persistentvolume snipeit-pv'
-                }
-            }
-        }
+        
+        
         stage('Deploy to Kubernetes') {
             steps {
                 script {
