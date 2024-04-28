@@ -9,6 +9,16 @@ pipeline {
                 }
             }
         }
+        stage('Filter Kubernetes Events') {
+            steps {
+                script {
+                    // 使用 kubectl 获取 Kubernetes 事件日志，并过滤特定事件
+                    def eventLogs = sh(script: 'microk8s kubectl get events', returnStdout: true).trim()
+                    def filteredEvents = eventLogs.split('\n').findAll { event -> event.contains("Failed to pull Docker image") }
+                    echo "Filtered Events: ${filteredEvents}"
+                }
+            }
+        }
         stage('Validate Docker Image') {
             steps {
                 script {
