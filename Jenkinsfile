@@ -9,8 +9,15 @@ pipeline {
                 }
             }
         }
-        
-        
+        stage('describe pvc and storageclass ') {
+            steps {
+                script {
+                    sh 'microk8s kubectl delete persistentvolume db-pv'
+                    sh 'microk8s kubectl delete persistentvolume snipeit-pv'
+                 
+                }
+            }
+        }        
         stage('Deploy to Kubernetes') {
             steps {
                 script {
