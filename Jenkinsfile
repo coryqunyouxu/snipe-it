@@ -40,7 +40,7 @@ pipeline {
                     def snipeitIp = sh(script: "microk8s kubectl get svc snipeit '-o=jsonpath={.status.loadBalancer.ingress[0].ip}'", returnStdout: true).trim()
                     def snipeitPort = sh(script: "microk8s kubectl get svc snipeit '-o=jsonpath={.spec.ports[0].port}'", returnStdout: true).trim()
                     echo "Snipeit Service IP: ${snipeitIp}:${snipeitPort}"
-                    sh "ping -c 5 ${snipeitIP}"
+                    sh "ping -c 5 ${snipeitIp}"
                 }
             }
         }
