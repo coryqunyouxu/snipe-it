@@ -11,9 +11,9 @@ metadata:
   namespace: snipeit
 spec:
   ports:
-    - name: "8000"
-      port: 60
-      targetPort: 8000
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
   selector:
     io.kompose.service: snipeit
   type: ClusterIP
