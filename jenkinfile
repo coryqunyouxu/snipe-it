@@ -27,7 +27,7 @@ pipeline {
                 script {
                     sh 'microk8s kubectl get pods -n snipeit'
                     sh 'microk8s kubectl get pods -n metallb-system'
-                    sh 'microk8s kubectl logs -n metallb-system my-ip-space'
+                    sh 'microk8s kubectl logs -n metallb-system controller-67d9f4b5bc-8fqpw'
                 }
             }
         }
