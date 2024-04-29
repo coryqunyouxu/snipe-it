@@ -1,5 +1,5 @@
-apiVersion: metallb.io/v1alpha1
-kind: AddressPool
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
 metadata:
   name: my-ip-space
 spec:
