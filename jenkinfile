@@ -1,10 +1,14 @@
 pipeline {
     agent any
     stages {
-        stage('apply') {
+        stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    sh 'microk8s kubectl get node -A -o wide'
+                    dir('metalib') {
+                        sh 'microk8s kubectl apply -f metallb-addressconfig.yaml'
+                        
+                        
+                    }
                 }
             }
         }
