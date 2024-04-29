@@ -1,8 +1,7 @@
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
+apiVersion: metallb.io/v1alpha1
+kind: AddressPool
 metadata:
   name: my-ip-space
 spec:
-  protocol: layer2
   addresses:
   - 172.23.8.59-172.23.8.60
