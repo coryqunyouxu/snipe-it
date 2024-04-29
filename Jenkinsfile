@@ -43,13 +43,6 @@ pipeline {
                 }
             }
         }
-        stage('Enable Ingress') {
-            steps {
-                script {
-                    sh 'microk8s enable ingress -n snipeit'
-                }
-            }
-        }
         stage('Get Pods') {
             steps {
                 script {
