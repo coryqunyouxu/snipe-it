@@ -1,6 +1,18 @@
 pipeline {
     agent any
     stages {
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    dir('deployment') {
+                        sh 'microk8s kubectl apply -f snipeit-service.yaml -n snipeit'
+                        sh 'microk8s kubectl apply -f snipeit-deployment.yaml -n snipeit'
+                        sh 'microk8s kubectl rollout restart deployment snipeit -n snipeit'
+                        
+                    }
+                }
+            }
+        }
         stage('check org') {
             steps {
                 script {
