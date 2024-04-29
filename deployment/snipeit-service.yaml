@@ -16,6 +16,4 @@ spec:
       targetPort: 8000
   selector:
     io.kompose.service: snipeit
-  type: LoadBalancer
-status:
-  loadBalancer: {}
+  type: ClusterIP
