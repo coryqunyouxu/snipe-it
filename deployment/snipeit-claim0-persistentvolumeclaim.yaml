@@ -5,6 +5,7 @@ metadata:
   labels:
     io.kompose.service: snipeit-claim0
   name: snipeit-claim0
+  namespace: snipeit
 spec:
   accessModes:
     - ReadWriteOnce
