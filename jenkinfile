@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     dir('deployment') {
-                        sh 'microk8s kubectl apply -f metallb-config.yaml '
+                        sh 'microk8s kubectl apply -f metallb-config.yaml -n metallb-system'
                         sh 'microk8s kubectl apply -f ingress.yaml -n snipeit'
                         sh 'microk8s kubectl apply -f snipeit-service.yaml -n snipeit'
                         sh 'microk8s kubectl apply -f snipeit-deployment.yaml -n snipeit'    
@@ -30,7 +30,8 @@ pipeline {
         stage('Get Pods') {
             steps {
                 script {
-                    sh 'microk8s kubectl get pods'
+                    sh 'microk8s kubectl get pods -n snipeit'
+                    sh 'microk8s kubectl get pods -n metallb-system'
                 }
             }
         }
