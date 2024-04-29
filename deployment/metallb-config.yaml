@@ -4,7 +4,7 @@ metadata:
   name: default
 spec:
   addresses:
-  - 172.23.8.60-172.23.8.60
+  - 172.23.8.58-172.23.8.60
   autoAssign: true
 ---
 apiVersion: metallb.io/v1beta1
