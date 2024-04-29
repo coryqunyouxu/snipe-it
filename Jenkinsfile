@@ -19,6 +19,14 @@ pipeline {
             }
         }
         
+        stage('Check ingress') {
+            steps {
+                script {
+                    sh 'microk8s kubectl get ingress -n snipeit'
+                }
+            }
+        }
+        
         stage('Check pvc') {
             steps {
                 script {
