@@ -4,4 +4,4 @@ metadata:
   name: my-ip-space
 spec:
   addresses:
-  - 172.23.8.59-172.23.8.60
+  - 172.23.8.61-172.23.8.62
