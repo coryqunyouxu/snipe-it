@@ -6,6 +6,8 @@ pipeline {
                 script {
                     sh 'microk8s kubectl describe pvc db'
                     sh 'microk8s kubectl describe pvc snipeit-claim0'
+                    sh 'microk8s kubectl describe pv db-pv'
+                    sh 'microk8s kubectl describe pv snipeit-pv'
                 }
             }
         }
