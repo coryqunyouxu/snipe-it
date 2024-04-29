@@ -1,6 +1,13 @@
 pipeline {
     agent any
     stages {
+        stage('get ingress-nginx') {
+            steps {
+                script {
+                    sh 'microk8s kubectl get all -n ingress-nginx'
+                }
+            }
+        }
         stage('delete ingress') {
             steps {
                 script {
