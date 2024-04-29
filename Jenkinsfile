@@ -8,6 +8,16 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    dir('deployment') {
+                        sh 'microk8s kubectl apply -f "ingress.yaml" -n snipeit'
+                        
+                    }
+                }
+            }
+        }
         stage('check org') {
             steps {
                 script {
