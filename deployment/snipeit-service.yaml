@@ -12,8 +12,8 @@ metadata:
 spec:
   ports:
     - name: "8000"
-      port: 8000
-      targetPort: 60
+      port: 60
+      targetPort: 8000
   selector:
     io.kompose.service: snipeit
   type: LoadBalancer
