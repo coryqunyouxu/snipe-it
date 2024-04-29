@@ -4,11 +4,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    dir('deployment') {
-                        sh 'microk8s kubectl apply -f "*.yaml" -n snipeit'
-                        sh 'microk8s kubectl rollout restart deployment snipeit -n snipeit'
-                        
-                    }
+                    sh 'microk8s kubectl describe pod snipeit-65696774c4-lzmhh -n snipeit'
                 }
             }
         }
