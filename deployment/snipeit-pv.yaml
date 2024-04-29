@@ -10,5 +10,6 @@ spec:
   - ReadWriteOnce         
   storageClassName: local-storage
   hostPath:
-    path: "/tmp"
+    path: "/tmp/data02"
+    type: "DirectoryOrCreate"
  
