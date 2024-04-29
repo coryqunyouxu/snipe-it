@@ -4,9 +4,9 @@ metadata:
   name: snipeit-ingress
   namespace: snipeit
 spec:
+  ingressClassName: nginx
   rules:
-    - host: snipeit.services.com  # 替換成您的域名
-      http:
+    - http:
         paths:
           - path: /snipeit
             pathType: Prefix
