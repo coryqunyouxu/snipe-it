@@ -14,5 +14,5 @@ spec:
               service:
                 name: snipeit
                 port:
-                  number: 8000
+                  number: 8080
           
