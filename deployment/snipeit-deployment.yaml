@@ -497,5 +497,5 @@ spec:
       volumes:
         - name: snipeit0
           persistentVolumeClaim:
-            claimName: snipeit-claim0
+            claimName: snipeit-claim
 status: {}
