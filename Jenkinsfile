@@ -17,6 +17,9 @@ pipeline {
                     dir('deployment') {
                         sh 'microk8s kubectl apply -f "*.yaml" -n snipeit'
                         sh 'microk8s kubectl rollout restart deployment snipeit -n snipeit'
+                        sh 'microk8s kubectl rollout restart deployment mailhog -n snipeit'
+                        sh 'microk8s kubectl rollout restart deployment mariadb -n snipeit'
+                        sh 'microk8s kubectl rollout restart deployment redis -n snipeit'
                     }
                 }
             }
@@ -24,37 +27,29 @@ pipeline {
         stage('Check pvc') {
             steps {
                 script {
-                    sh 'microk8s kubectl get pvc'
+                    sh 'microk8s kubectl get pvc -n snipeit'
                 }
             }
         }
         stage('Enable Ingress') {
             steps {
                 script {
-                    sh 'microk8s enable ingress'
+                    sh 'microk8s enable ingress -n snipeit'
                 }
             }
         }
         stage('Get Pods') {
             steps {
                 script {
-                    sh 'microk8s kubectl get pods'
-                    sh 'microk8s kubectl logs mariadb-5878b7646c-j5jpb'
-                }
-            }
-        }
-        stage('Describe Snipeit Pod') {
-            steps {
-                script {
-                    sh 'microk8s kubectl describe node'
+                    sh 'microk8s kubectl get pods -n snipeit'
                 }
             }
         }
         stage('Get And Check Snipeit Service IP') {
             steps {
                 script {
-                    def snipeitIp = sh(script: "microk8s kubectl get svc snipeit '-o=jsonpath={.status.loadBalancer.ingress[0].ip}'", returnStdout: true).trim()
-                    def snipeitPort = sh(script: "microk8s kubectl get svc snipeit '-o=jsonpath={.spec.ports[0].port}'", returnStdout: true).trim()
+                    def snipeitIp = sh(script: "microk8s kubectl get svc snipeit -n snipeit '-o=jsonpath={.status.loadBalancer.ingress[0].ip}'", returnStdout: true).trim()
+                    def snipeitPort = sh(script: "microk8s kubectl get svc snipeit -n snipeit '-o=jsonpath={.spec.ports[0].port}'", returnStdout: true).trim()
                     echo "Snipeit Service IP: ${snipeitIp}:${snipeitPort}"
                     sh "ping -c 5 ${snipeitIp}"
                 }
