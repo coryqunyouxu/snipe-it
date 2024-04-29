@@ -1,6 +1,14 @@
 pipeline {
     agent any
     stages {
+        stage('delete ingress') {
+            steps {
+                script {
+                    sh 'microk8s kubectl delete ingress snipeit-ingress -n snipeit'
+                }
+            }
+        }
+        
         stage('Deploy to Kubernetes') {
             steps {
                 script {
