@@ -10,16 +10,7 @@ pipeline {
                     sh 'microk8s kubectl describe pv snipeit-pv'
                 }
             }
-        }
-        stage('Build and push Docker image') {
-            steps {
-                script {
-                    sh 'docker build . -t 172.23.8.1:9500/snipeit:latest --no-cache'
-                    sh 'docker image push 172.23.8.1:9500/snipeit:latest'
-                }
-            }
-        }
-            
+        }          
         stage('Deploy to Kubernetes') {
             steps {
                 script {
@@ -29,17 +20,6 @@ pipeline {
                     }
                 }
             }
-        }
-        
-        stage('describe pvc and storageclass ') {
-            steps {
-                script {
-                    sh 'microk8s kubectl describe pvc db'
-                    sh 'microk8s kubectl describe pvc snipeit-claim0'
-                    sh 'microk8s kubectl describe storageclass '
-                }
-            }
-        }
         stage('Check pvc') {
             steps {
                 script {
@@ -47,7 +27,6 @@ pipeline {
                 }
             }
         }
-        
         stage('Enable Ingress') {
             steps {
                 script {
@@ -59,6 +38,8 @@ pipeline {
             steps {
                 script {
                     sh 'microk8s kubectl get pods'
+                    sh 'microk8s kubectl logs mariadb-5878b7646c-j5jpb'
+                    sh 'microk8s kubectl logs snipeit-84f85c956f-xlhcv'
                 }
             }
         }
