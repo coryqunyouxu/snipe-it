@@ -32,7 +32,6 @@ pipeline {
             steps {
                 script {
                     sh 'microk8s kubectl get svc -n snipeit'
-                    sh 'microk8s kubectl get svc -n ingress-nginx'
                 }
             }
         }
