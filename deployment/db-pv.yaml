@@ -4,7 +4,7 @@ metadata:
   name: db-pv    
 spec:
   capacity:
-    storage: 400Mi          
+    storage: 200Mi          
   accessModes:
   - ReadWriteOnce         
   storageClassName: db-snipeit-storage
