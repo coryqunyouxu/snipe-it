@@ -8,7 +8,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: db-snipeit-storage
+  storageClassName: local-storage
   resources:
     requests:
       storage: 6Gi
