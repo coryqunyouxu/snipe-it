@@ -20,6 +20,7 @@ pipeline {
                     }
                 }
             }
+        }
         stage('Check pvc') {
             steps {
                 script {
