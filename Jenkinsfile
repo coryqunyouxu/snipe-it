@@ -10,7 +10,15 @@ pipeline {
                     sh 'microk8s kubectl describe pv snipeit-pv'
                 }
             }
-        }          
+        }   
+        stage('Build and push Docker image') {
+            steps {
+                script {
+                    sh 'docker build . -t 172.23.8.1:9500/snipeit:latest --no-cache'
+                    sh 'docker image push 172.23.8.1:9500/snipeit:latest'
+                }
+            }
+        }
         stage('Deploy to Kubernetes') {
             steps {
                 script {
