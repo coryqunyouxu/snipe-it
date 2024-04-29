@@ -7,13 +7,6 @@ spec:
     - host: snipeit.services.com  # 替換成您的域名
       http:
         paths:
-          - path: /redis
-            pathType: Prefix
-            backend:
-              service:
-                name: redis
-                port:
-                  number: 6379
           - path: /snipeit
             pathType: Prefix
             backend:
@@ -21,17 +14,4 @@ spec:
                 name: snipeit
                 port:
                   number: 8000
-          - path: /mailhog
-            pathType: Prefix
-            backend:
-              service:
-                name: mailhog
-                port:
-                  number: 8025
-          - path: /mariadb
-            pathType: Prefix
-            backend:
-              service:
-                name: mariadb
-                port:
-                  number: 3306
+          
