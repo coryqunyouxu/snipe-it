@@ -4,7 +4,7 @@ pipeline {
          stage('check org') {
             steps {
                 script {
-                    sh 'microk8s describe'
+                    sh 'microk8s describe pvc db'
                 }
             }
         }
