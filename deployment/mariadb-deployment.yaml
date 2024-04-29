@@ -497,5 +497,5 @@ spec:
       volumes:
         - name: mdb
           persistentVolumeClaim:
-            claimName: db
+            claimName: db-claim
 status: {}
