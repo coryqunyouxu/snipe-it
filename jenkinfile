@@ -5,6 +5,7 @@ pipeline {
             steps {
                 script {
                     sh 'microk8s kubectl get pods --namespace=ingress-nginx'
+                    sh 'microk8s kubectl get all -n ingress-nginx'
                 }
             }
         }
