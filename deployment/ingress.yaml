@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: snipeit-ingress
+  namespace: spineit
 spec:
   rules:
     - host: snipeit.services.com  # 替換成您的域名
