@@ -4,8 +4,7 @@ pipeline {
         stage('apply') {
             steps {
                 script {
-                    sh 'microk8s kubectl get pods --namespace=ingress-nginx'
-                    sh 'microk8s kubectl get all -n ingress-nginx'
+                    sh 'microk8s kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.7/config/manifests/metallb-native.yaml'
                 }
             }
         }
