@@ -1,10 +1,12 @@
 pipeline {
     agent any
     stages {
+        
         stage('Deploy to Kubernetes') {
             steps {
                 script {
                     dir('deployment') {
+                        sh 'microk8s kubectl apply -f ingress.yaml -n snipeit'
                         sh 'microk8s kubectl apply -f snipeit-service.yaml -n snipeit'
                         sh 'microk8s kubectl apply -f snipeit-deployment.yaml -n snipeit'    
                     }
@@ -14,7 +16,8 @@ pipeline {
         stage('GET service') {
             steps {
                 script {
-                    sh 'microk8s kubectl get service -n snipeit'
+                    sh 'microk8s kubectl get ingress -n snipeit'
+                    sh 'microk8s kubectl describe ingress snipeit-ingress -n snipeit'
                 }
             }
         }
