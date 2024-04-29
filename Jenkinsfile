@@ -48,7 +48,6 @@ pipeline {
                 script {
                     sh 'microk8s kubectl get pods'
                     sh 'microk8s kubectl logs mariadb-5878b7646c-j5jpb'
-                    sh 'microk8s kubectl logs snipeit-84f85c956f-xlhcv'
                 }
             }
         }
