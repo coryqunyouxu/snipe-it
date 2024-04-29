@@ -4,11 +4,21 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    
-                        sh 'microk8s kubectl get all -n ingress-nginx'
+                    dir('deployment') {
+                        sh 'microk8s kubectl apply -f ingress.yaml -n snipeit'
+                        sh 'microk8s kubectl apply -f snipeit-service.yaml -n snipeit'
+                        sh 'microk8s kubectl apply -f snipeit-deployment.yaml -n snipeit'
+                        sh 'microk8s kubectl rollout restart deployment snipeit -n snipeit'
                         
-                        
-                    
+                    }
+                }
+            }
+        }
+        stage('GET Ingress') {
+            steps {
+                script {
+                    sh 'microk8s kubectl get ingress'
+                    sh 'microk8s kubectl describe ingress snipeit-ingress'
                 }
             }
         }
