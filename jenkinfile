@@ -17,8 +17,8 @@ pipeline {
         stage('GET Ingress') {
             steps {
                 script {
-                    sh 'microk8s kubectl get ingress'
-                    sh 'microk8s kubectl describe ingress snipeit-ingress'
+                    sh 'microk8s kubectl get ingress -n snipeit'
+                    sh 'microk8s kubectl describe ingress snipeit-ingress -n snipeit'
                 }
             }
         }
