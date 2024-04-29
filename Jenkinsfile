@@ -1,6 +1,13 @@
 pipeline {
     agent any
     stages {
+         stage('check org') {
+            steps {
+                script {
+                    sh 'microk8s describe'
+                }
+            }
+        }
         stage('Build and push Docker image') {
             steps {
                 script {
