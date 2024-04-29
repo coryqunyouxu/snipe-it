@@ -3,13 +3,13 @@ kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: snipeit-claim0
-  name: snipeit-claim0
+    io.kompose.service: snipeit-claim
+  name: snipeit-claim
   namespace: snipeit
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: db-snipeit-storage
+  storageClassName: local-storage
   resources:
     requests:
       storage: 100Mi
