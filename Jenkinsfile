@@ -18,6 +18,14 @@ pipeline {
                 }
             }
         } 
+        stage('Check svc') {
+            steps {
+                script {
+                    sh 'microk8s kubectl get svc -n ingress-nginx -n snipeit'
+                }
+            }
+        }
+        
         stage('Check pvc') {
             steps {
                 script {
