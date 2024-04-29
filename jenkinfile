@@ -26,6 +26,13 @@ pipeline {
                 }
             }
         }
+        stage('Get Pods') {
+            steps {
+                script {
+                    sh 'microk8s kubectl get pods -n snipeit'
+                }
+            }
+        }
         stage('GET service') {
             steps {
                 script {
