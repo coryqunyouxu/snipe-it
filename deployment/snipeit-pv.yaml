@@ -7,7 +7,7 @@ spec:
     storage: 8Gi          
   accessModes:
   - ReadWriteOnce         
-  storageClassName: db-snipeit-storage
+  storageClassName: local-storage
   hostPath:
     path: "/tmp/data02"
     type: "DirectoryOrCreate"
