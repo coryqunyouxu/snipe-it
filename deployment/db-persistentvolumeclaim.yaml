@@ -11,5 +11,5 @@ spec:
   storageClassName: db-snipeit-storage
   resources:
     requests:
-      storage: 2Gi
+      storage: 1Gi
 status: {}
