@@ -25,6 +25,9 @@ pipeline {
                     dir('deployment') {
                         sh 'microk8s kubectl apply -f "*.yaml"'
                         sh 'microk8s kubectl rollout restart deployment snipeit'
+                        sh 'microk8s kubectl rollout restart deployment redis'
+                        sh 'microk8s kubectl rollout restart deployment mariadb'
+                        sh 'microk8s kubectl rollout restart deployment mailhog'
                     }
                 }
             }
