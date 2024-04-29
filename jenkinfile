@@ -1,31 +1,20 @@
 pipeline {
     agent any
     stages {
-        stage('delete ingress') {
-            steps {
-                script {
-                    sh 'microk8s kubectl delete ingress snipeit-ingress -n snipeit'
-                }
-            }
-        }
         stage('Deploy to Kubernetes') {
             steps {
                 script {
                     dir('deployment') {
-                        sh 'microk8s kubectl apply -f ingress.yaml -n snipeit'
                         sh 'microk8s kubectl apply -f snipeit-service.yaml -n snipeit'
-                        sh 'microk8s kubectl apply -f snipeit-deployment.yaml -n snipeit'
-                       
-                        
+                        sh 'microk8s kubectl apply -f snipeit-deployment.yaml -n snipeit'    
                     }
                 }
             }
         }
-        stage('GET Ingress') {
+        stage('GET service') {
             steps {
                 script {
-                    sh 'microk8s kubectl get ingress -n snipeit'
-                    sh 'microk8s kubectl describe ingress snipeit-ingress -n snipeit'
+                    sh 'microk8s kubectl get service -n snipeit'
                 }
             }
         }
