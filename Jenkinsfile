@@ -17,8 +17,8 @@ pipeline {
                 script {
                     sh 'microk8s kubectl describe pvc db-claim -n snipeit'
                     sh 'microk8s kubectl describe pvc snipeit-claim -n snipeit'
-                    sh 'microk8s kubectl describe pv db-pv-TEST -n snipeit'
-                    sh 'microk8s kubectl describe pv snipeit-pv-TEST -n snipeit'
+                    sh 'microk8s kubectl describe pv db-pv-test -n snipeit'
+                    sh 'microk8s kubectl describe pv snipeit-pv-test -n snipeit'
                 }
             }
         } 
