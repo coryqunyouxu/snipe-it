@@ -4,11 +4,10 @@ metadata:
   name: snipeit-pv      
 spec:
   capacity:
-    storage: 8Gi          
+    storage: 4Gi          
   accessModes:
   - ReadWriteOnce         
-  storageClassName: local-storage
+  storageClassName: db-snipeit-storage
   hostPath:
-    path: "/tmp/data02"
-    type: "DirectoryOrCreate"
+    path: "/tmp"
  
