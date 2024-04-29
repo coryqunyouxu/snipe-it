@@ -8,8 +8,8 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-storage
+  storageClassName: db-snipeit-storage
   resources:
     requests:
-      storage: 1Gi
+      storage: 2Gi
 status: {}
