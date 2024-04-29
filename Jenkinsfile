@@ -5,6 +5,7 @@ pipeline {
             steps {
                 script {
                     dir('deployment') {
+                        sh 'microk8s kubectl apply -f ingress.yaml -n snipeit'
                         sh 'microk8s kubectl apply -f snipeit-service.yaml -n snipeit'
                         sh 'microk8s kubectl apply -f snipeit-deployment.yaml -n snipeit'
                         sh 'microk8s kubectl rollout restart deployment snipeit -n snipeit'
