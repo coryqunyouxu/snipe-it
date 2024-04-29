@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script {
                     dir('deployment') {
-                        sh 'microk8s kubectl apply -f ingress.yaml --namespace=spineit'
+                        sh 'microk8s kubectl apply -f ingress.yaml -n snipeit'
                         
                     }
                 }
