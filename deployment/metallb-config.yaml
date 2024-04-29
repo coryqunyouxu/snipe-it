@@ -1,5 +1,5 @@
 apiVersion: metallb.io/v1beta1
-kind: ConfigMap
+kind: L2Advertisement
 metadata:
   namespace: metallb-system
   name: config
