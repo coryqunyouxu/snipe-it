@@ -4,11 +4,11 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    dir('metalib') {
-                        sh 'microk8s kubectl apply -f metallb-addressconfig.yaml'
+                    
+                        sh 'microk8s kubectl get all -n ingress-nginx'
                         
                         
-                    }
+                    
                 }
             }
         }
