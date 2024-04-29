@@ -1,9 +1,6 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: db-snipeit-storage
-provisioner: kubernetes.io/aws-ebs
-parameters:
-  type: gp2
-  zone: us-west-2
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
 allowVolumeExpansion: true
