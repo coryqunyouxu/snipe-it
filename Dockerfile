@@ -47,7 +47,7 @@ unzip \
 dnsutils \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN chmod 777 /var/www/html/storage
+
 RUN curl -L -O https://github.com/pear/pearweb_phars/raw/master/go-pear.phar
 RUN php go-pear.phar
 
@@ -78,7 +78,7 @@ RUN a2enmod ssl
 RUN a2ensite 001-default-ssl.conf
 
 COPY . /var/www/html
-
+RUN chmod 777 /var/www/html/storage
 RUN a2enmod rewrite
 
 COPY docker/column-statistics.cnf /etc/mysql/conf.d/column-statistics.cnf
