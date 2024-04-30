@@ -16,6 +16,6 @@ spec:
       targetPort: 8025
   selector:
     io.kompose.service: mailhog
-  type: LoadBalancer
+  type: ClusterIP
 status:
   loadBalancer: {}
