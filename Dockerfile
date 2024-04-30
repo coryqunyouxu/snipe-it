@@ -78,8 +78,7 @@ RUN a2enmod ssl
 RUN a2ensite 001-default-ssl.conf
 
 COPY . /var/www/html
-RUN chmod -R 777 /var/www/html/storage
-RUN ls -l /var/www/html/storage
+
 RUN a2enmod rewrite
 
 COPY docker/column-statistics.cnf /etc/mysql/conf.d/column-statistics.cnf
@@ -134,7 +133,8 @@ USER root
 VOLUME ["/var/lib/snipeit"]
 
 ##### START SERVER
-
+RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 777 /var/www/html
 COPY docker/startup.sh docker/supervisord.conf /
 COPY docker/supervisor-exit-event-listener /usr/bin/supervisor-exit-event-listener
 RUN chmod +x /startup.sh /usr/bin/supervisor-exit-event-listener
