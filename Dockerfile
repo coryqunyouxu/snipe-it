@@ -79,6 +79,7 @@ RUN a2ensite 001-default-ssl.conf
 
 COPY . /var/www/html
 RUN chmod -R 777 /var/www/html/storage
+RUN ls -l /var/www/html/storage
 RUN a2enmod rewrite
 
 COPY docker/column-statistics.cnf /etc/mysql/conf.d/column-statistics.cnf
