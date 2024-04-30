@@ -47,7 +47,7 @@ unzip \
 dnsutils \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-
+RUN chmod 777 /var/www/html/storage
 RUN curl -L -O https://github.com/pear/pearweb_phars/raw/master/go-pear.phar
 RUN php go-pear.phar
 
