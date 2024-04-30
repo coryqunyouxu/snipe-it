@@ -14,7 +14,7 @@ spec:
   ports:
     - name: "http"
       port: 3000
-      targetPort: 3001
+      targetPort: 3000
       nodePort: 30014
   selector:
     io.kompose.service: snipeit
