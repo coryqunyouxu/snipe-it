@@ -4,7 +4,7 @@ data:
   API_TOKEN_EXPIRATION_YEARS: "40"
   APP_CIPHER: AES-256-CBC
   APP_DEBUG: "false"
-  APP_ENV: develop
+  APP_ENV: production
   APP_FORCE_TLS: "false"
   APP_KEY: base64:3ilviXqB9u6DX1NRcyWGJ+sjySF+H18CPDGb3+IVwMQ=
   APP_LOCALE: en
