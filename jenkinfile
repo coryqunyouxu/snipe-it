@@ -1,41 +1,11 @@
 pipeline {
     agent any
     stages {
-       
-        stage('get ingress-nginx') {
+       stage('Build and push Docker image') {
             steps {
                 script {
-                    sh 'microk8s kubectl get all -n ingress-nginx'
-                }
-            }
-        }
-        
-        stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    dir('deployment') {
-                        sh 'microk8s kubectl apply -f metallb-config.yaml -n metallb-system'
-                        sh 'microk8s kubectl apply -f ingress.yaml -n snipeit'
-                        sh 'microk8s kubectl apply -f snipeit-service.yaml -n snipeit'
-                        sh 'microk8s kubectl apply -f snipeit-deployment.yaml -n snipeit'    
-                    }
-                }
-            }
-        }
-        stage('Get Pods') {
-            steps {
-                script {
-                    sh 'microk8s kubectl get pods -n snipeit'
-                    sh 'microk8s kubectl get pods -n metallb-system'
-                    sh 'microk8s kubectl logs -n metallb-system controller-67d9f4b5bc-8fqpw'
-                }
-            }
-        }
-        stage('GET service') {
-            steps {
-                script {
-                    sh 'microk8s kubectl get ingress -n snipeit'
-                    sh 'microk8s kubectl describe ingress snipeit-ingress -n snipeit'
+                    sh 'docker build . -t 172.23.8.1:9500/snipeit:latest --no-cache'
+                    sh 'docker image push 172.23.8.1:9500/snipeit:latest'
                 }
             }
         }
