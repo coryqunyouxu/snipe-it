@@ -1,21 +1,19 @@
 pipeline {
     agent any
     stages {
-        stage('delete ingress') {
+        stage('Build and push Docker image') {
             steps {
                 script {
-                    sh 'microk8s kubectl delete ingress snipeit-ingress -n snipeit'
+                    sh 'docker build . -t 172.23.8.1:9500/snipeit:latest --no-cache'
+                    sh 'docker image push 172.23.8.1:9500/snipeit:latest'
                 }
             }
         }
-        
         stage('Deploy to Kubernetes') {
             steps {
                 script {
                     dir('deployment') {
-                        sh 'microk8s kubectl apply -f ingress.yaml -n snipeit'
                         sh 'microk8s kubectl apply -f snipeit-service.yaml -n snipeit'
-                        sh 'microk8s kubectl apply -f snipeit-deployment.yaml -n snipeit'
                         sh 'microk8s kubectl rollout restart deployment snipeit -n snipeit'
                         
                     }
