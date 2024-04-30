@@ -11,7 +11,7 @@ data:
   APP_LOCKED: "false"
   APP_TIMEZONE: UTC
   APP_TRUSTED_PROXIES: 192.168.1.1,10.0.0.1
-  APP_URL: http://localhost:8000
+  APP_URL: http://localhost
   AWS_ACCESS_KEY_ID: "null"
   AWS_DEFAULT_REGION: "null"
   AWS_SECRET_ACCESS_KEY: "null"
