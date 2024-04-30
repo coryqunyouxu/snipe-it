@@ -16,6 +16,6 @@ spec:
       targetPort: 3306
   selector:
     io.kompose.service: mariadb
-  type: LoadBalancer
+  type: ClusterIP
 status:
   loadBalancer: {}
