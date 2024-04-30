@@ -486,7 +486,7 @@ spec:
           image: 172.23.8.1:9500/snipeit:latest
           name: snipeit
           ports:
-            - containerPort: 3000
+            - containerPort: 3001
               protocol: TCP
           resources: {}
           volumeMounts:
