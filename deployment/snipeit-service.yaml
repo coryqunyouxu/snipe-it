@@ -16,6 +16,6 @@ spec:
       protocol: TCP
       port: 3001
       targetPort: 3001
-      nodeport: 30980
+      nodePort: 30980
   selector:
     io.kompose.service: snipeit
