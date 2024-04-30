@@ -15,6 +15,6 @@ spec:
     targetPort: 6379
   selector:
     io.kompose.service: redis
-  type: LoadBalancer
+  type: ClusterIP
 status:
   loadBalancer: {}
