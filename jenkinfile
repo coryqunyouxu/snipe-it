@@ -11,6 +11,7 @@ pipeline {
                         sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
                         sh 'docker build . -t coryblue/snipeit:latest --no-cache'
                         sh 'docker image push coryblue/snipeit:latest'
+                    }
                 }
             }
         }
