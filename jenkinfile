@@ -1,9 +1,9 @@
 pipeline {
     agent any
-    stages {
-        environment {
+    environment {
             DOCKER_REGISTRY_CREDENTIALS = credentials('04082453-26b2-4170-a292-24e9e83d6afe') 
         }
+    stages {
         stage('Build and push Docker image') {
             steps {
                 script {
