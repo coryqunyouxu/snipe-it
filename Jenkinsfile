@@ -4,8 +4,8 @@ pipeline {
         stage('Build and push Docker image') {
             steps {
                 script {
-                    sh 'docker build . -t 172.23.8.1:9500/snipeit:latest --no-cache'
-                    sh 'docker image push 172.23.8.1:9500/snipeit:latest'
+                    sh 'docker build . -t coryblue/snipeit:latest --no-cache'
+                    sh 'docker image push coryblue/snipeit:latest'
                 }
             }
         }
